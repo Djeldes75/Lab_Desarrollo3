@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="DenunciasClient/DenunciasClient.csproj" />
+  <Project Path="DenunciasService/DenunciasService.csproj" />
+</Solution>

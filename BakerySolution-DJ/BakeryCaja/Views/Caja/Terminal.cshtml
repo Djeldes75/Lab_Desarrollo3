@@ -1,0 +1,263 @@
+﻿@model List<BakeryCaja.Models.Product>
+@{
+    Layout = null; decimal montoInicial = ViewBag.MontoInicial; decimal ventas = ViewBag.Ventas; decimal entradas = ViewBag.Entradas; decimal salidas = ViewBag.Salidas; decimal totalCaja = ViewBag.TotalCaja;
+}
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pan y Lujo - POS</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🥐</text></svg>">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { choco: { 900: '#1a0f0a', 800: '#2d1b14', 700: '#4a2c21', 600: '#5d3a2e' }, cream: { 100: '#fffbf0', 200: '#ffefd5', 300: '#ffe0b2' }, gold: '#ffc107', bread: '#d97706' }, animation: { 'bounce-short': 'bounce-short 0.5s ease-in-out 1', 'float': 'float 3s ease-in-out infinite' }, keyframes: { 'bounce-short': { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-10px)' } }, float: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-5px)' } }, fadeIn: { '0%': { opacity: '0', transform: 'scale(0.95)' }, '100%': { opacity: '1', transform: 'scale(1)' } } } } } }</script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .custom-scroll::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .custom-scroll::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .custom-scroll::-webkit-scrollbar-thumb {
+            background-color: rgba(217, 119, 6, 0.3);
+            border-radius: 20px;
+        }
+
+        body, div, button, span {
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s, transform 0.1s;
+        }
+
+        .hidden-product {
+            display: none !important;
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.3s ease-out;
+        }</style>
+</head>
+<body onclick="closeMenus(event)" class="bg-cream-100 dark:bg-choco-900 text-gray-800 dark:text-gray-100 h-screen flex overflow-hidden font-sans selection:bg-gold selection:text-choco-900">
+
+    <div class="w-full md:w-2/3 p-4 flex flex-col h-full relative">
+        <div class="flex justify-between items-center mb-6 bg-white/60 dark:bg-choco-800/60 backdrop-blur-md p-4 rounded-2xl shadow-lg border border-cream-300 dark:border-choco-600 relative z-50">
+            <div class="flex items-center group cursor-default">
+                <div class="bg-gold p-2 rounded-lg text-choco-900 mr-3 shadow-md group-hover:rotate-12 transition-transform duration-300"><i class="fas fa-bread-slice text-2xl"></i></div>
+                <div><h1 class="text-2xl font-black tracking-tight text-bread dark:text-gold uppercase">Pan y Lujo</h1><div class="flex items-center text-xs font-mono opacity-70"><span class="w-2 h-2 rounded-full bg-green-500 animate-pulse mr-2"></span><span data-i18n="shift">Shift</span> #@ViewBag.TurnoId</div></div>
+            </div>
+            <div class="flex items-center gap-3">
+                <div class="relative z-50">
+                    <button id="btn-lang" onclick="toggleLangMenu(event)" class="flex items-center gap-2 bg-cream-200 dark:bg-choco-700 hover:bg-gold dark:hover:bg-gold hover:text-choco-900 px-4 py-2 rounded-xl font-bold text-sm shadow-sm transition-all transform hover:-translate-y-0.5"><i class="fas fa-language text-lg"></i> <span id="lang-label">EN</span> <i class="fas fa-chevron-down text-xs opacity-50"></i></button>
+                    <div id="lang-menu" class="absolute right-0 top-full mt-2 w-40 bg-white dark:bg-choco-800 rounded-xl shadow-2xl overflow-hidden hidden border border-cream-300 dark:border-choco-600 animate-fade-in z-[100]">
+                        <button onclick="setLang('en')" class="w-full text-left px-4 py-3 flex items-center gap-3 border-b border-cream-100 dark:border-choco-700/50 hover:bg-cream-100 dark:hover:bg-choco-700 font-bold">🇺🇸 English</button>
+                        <button onclick="setLang('es')" class="w-full text-left px-4 py-3 flex items-center gap-3 border-b border-cream-100 dark:border-choco-700/50 hover:bg-cream-100 dark:hover:bg-choco-700 font-bold">🇪🇸 Español</button>
+                        <button onclick="setLang('fr')" class="w-full text-left px-4 py-3 flex items-center gap-3 hover:bg-cream-100 dark:hover:bg-choco-700 font-bold">🇫🇷 Français</button>
+                    </div>
+                </div>
+                <button onclick="toggleTheme()" class="w-12 h-10 bg-cream-200 dark:bg-choco-700 rounded-xl flex items-center justify-center text-xl shadow-sm hover:scale-110 active:scale-95 transition-transform"><span id="theme-icon" class="animate-bounce-short">🍫</span></button>
+                <a href="/Access/Logout" class="w-10 h-10 bg-red-100 dark:bg-red-900/30 text-red-500 dark:text-red-400 rounded-xl flex items-center justify-center hover:bg-red-500 hover:text-white transition-colors shadow-sm"><i class="fas fa-power-off"></i></a>
+            </div>
+        </div>
+
+        <div class="flex gap-3 mb-4 overflow-x-auto pb-2 px-1 relative z-40" id="tabs-container">
+            <button onclick="filter('all', this)" class="tab-btn active bg-bread text-white px-6 py-2 rounded-full font-bold shadow-lg transform hover:-translate-y-1 transition-all" data-i18n="catAll">All</button>
+            <button onclick="filter('bread', this)" class="tab-btn bg-white dark:bg-choco-700 text-gray-500 dark:text-gray-400 px-6 py-2 rounded-full font-bold shadow-sm hover:bg-cream-100 dark:hover:bg-choco-600 transition-all flex items-center gap-2"><i class="fas fa-bread-slice"></i> <span data-i18n="catBreads">Breads</span></button>
+            <button onclick="filter('drink', this)" class="tab-btn bg-white dark:bg-choco-700 text-gray-500 dark:text-gray-400 px-6 py-2 rounded-full font-bold shadow-sm hover:bg-cream-100 dark:hover:bg-choco-600 transition-all flex items-center gap-2"><i class="fas fa-mug-hot"></i> <span data-i18n="catDrinks">Drinks</span></button>
+            <button onclick="filter('dessert', this)" class="tab-btn bg-white dark:bg-choco-700 text-gray-500 dark:text-gray-400 px-6 py-2 rounded-full font-bold shadow-sm hover:bg-cream-100 dark:hover:bg-choco-600 transition-all flex items-center gap-2"><i class="fas fa-cookie"></i> <span data-i18n="catDesserts">Desserts</span></button>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 overflow-y-auto pr-2 custom-scroll flex-grow content-start pb-20 relative z-0">
+            @foreach (var p in Model)
+            {
+                string cat = "dessert"; string icon = "🍩"; string gradient = "from-pink-500 to-rose-400";
+                if (p.Name.Contains("Pan") || p.Name.Contains("Sandwich") || p.Name.Contains("Croissant")) { cat = "bread"; icon = "🥐"; gradient = "from-orange-500 to-amber-500"; }
+                else if (p.Name.Contains("Café") || p.Name.Contains("Jugo")) { cat = "drink"; icon = "☕"; gradient = "from-amber-700 to-brown-600"; }
+                bool isSoldOut = p.Stock <= 0;
+                string disabledClass = isSoldOut ? "opacity-60 grayscale cursor-not-allowed" : "hover:shadow-xl hover:border-gold transform hover:-translate-y-1";
+                string onClickAction = isSoldOut ? "" : $"addToCart({p.Id}, '{p.Name}', {p.Price})";
+                <button onclick="@onClickAction" data-cat="@cat" class="prod-card relative bg-white dark:bg-choco-800 rounded-2xl p-4 shadow-md border-b-4 border-transparent transition-all duration-300 group overflow-hidden text-left @disabledClass">
+                    <div class="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br @gradient opacity-10 rounded-bl-full transition-opacity group-hover:opacity-20"></div>
+                    <div class="text-4xl mb-3 group-hover:animate-float transition-transform">@icon</div>
+                    <div class="relative z-10"><h3 class="font-bold text-gray-800 dark:text-gray-100 leading-tight mb-1 line-clamp-2" data-prod-name="@p.Name">@p.Name</h3><div class="flex items-baseline justify-between mt-2"><div><span class="text-xs text-gray-400">$</span><span class="text-xl font-black text-bread dark:text-gold">@p.Price.ToString("0.00")</span></div><div class="text-xs font-mono font-bold px-2 py-1 rounded-md @(isSoldOut ? "bg-red-500 text-white" : "bg-gray-100 dark:bg-choco-900 text-gray-500 dark:text-gray-400")">@if(isSoldOut){
+                    <span data-i18n="soldOut">SOLD OUT</span>
+                }else
+                {
+
+                    <i class="fas fa-box-open mr-1"></i> 
+                    @p.Stock
+                }
+</div></div></div>
+                @if (isSoldOut)
+                {
+                    <div class="absolute inset-0 z-20 flex items-center justify-center"><div class="border-4 border-red-500 text-red-500 font-black text-xl uppercase px-4 py-2 transform -rotate-12 opacity-80" data-i18n="soldOutStamp">AGOTADO</div></div>
+                }
+            </button>
+                        }
+        </div>
+    </div>
+
+    <div class="w-full md:w-1/3 bg-white/80 dark:bg-choco-800/90 backdrop-blur-xl border-l border-cream-300 dark:border-choco-600 shadow-2xl z-20 flex flex-col h-full">
+        <div class="p-5 border-b border-dashed border-gray-300 dark:border-choco-600 bg-cream-100/50 dark:bg-choco-900/50 flex justify-between items-center">
+            <h2 class="font-bold text-lg text-choco-900 dark:text-gold flex items-center gap-2"><i class="fas fa-receipt"></i> <span data-i18n="currentOrder">Order</span></h2>
+            <button onclick="askClearCart()" id="btn-trash" class="text-red-400 hover:text-red-600 transition-colors opacity-0 pointer-events-none" title="Vaciar Carrito"><i class="fas fa-trash-alt"></i></button>
+        </div>
+        <div id="cart-list" class="flex-grow overflow-y-auto p-4 space-y-3 custom-scroll"></div>
+        <div class="p-6 bg-white dark:bg-choco-800 border-t-2 border-gold shadow-[0_-10px_40px_rgba(0,0,0,0.1)] z-30">
+            <div class="space-y-1 mb-4 text-sm text-gray-500 dark:text-gray-400"><div class="flex justify-between"><span data-i18n="subtotal">Subtotal</span><span class="font-mono text-gray-800 dark:text-gray-200" id="lbl-subtotal">$0.00</span></div><div class="flex justify-between"><span data-i18n="tax">Tax (18%)</span><span class="font-mono text-gray-800 dark:text-gray-200" id="lbl-tax">$0.00</span></div></div>
+            <div class="flex justify-between items-end mb-6"><span class="text-xl font-bold uppercase tracking-widest text-gray-400" data-i18n="total">Total</span><span class="text-4xl font-black text-bread dark:text-gold" id="lbl-total">$0.00</span></div>
+            <form action="/Caja/ProcesarVenta" method="post" id="form-pay">
+                <input type="hidden" name="jsonDetalle" id="input-json" />
+                <input type="hidden" name="totalVenta" id="input-total" />
+                <input type="hidden" name="metodoPago" id="input-method" />
+                <input type="hidden" name="cliente" id="input-client" />
+
+                <div class="grid grid-cols-3 gap-3 mb-3">
+                    <button type="button" onclick="pay('Efectivo')" class="flex flex-col items-center justify-center py-4 rounded-2xl transition-all duration-200 active:scale-95 bg-green-100 hover:bg-green-500 text-green-700 hover:text-white border border-green-200"><i class="fas fa-money-bill-wave mb-1 text-xl"></i> <span class="text-xs font-bold" data-i18n="payCash">CASH</span></button>
+                    <button type="button" onclick="pay('Tarjeta')" class="flex flex-col items-center justify-center py-4 rounded-2xl transition-all duration-200 active:scale-95 bg-blue-100 hover:bg-blue-500 text-blue-700 hover:text-white border border-blue-200"><i class="far fa-credit-card mb-1 text-xl"></i> <span class="text-xs font-bold" data-i18n="payCard">CARD</span></button>
+                    <button type="button" onclick="pay('Bitcoin')" class="flex flex-col items-center justify-center py-4 rounded-2xl transition-all duration-200 active:scale-95 bg-orange-100 hover:bg-orange-500 text-orange-700 hover:text-white border border-orange-200"><i class="fab fa-bitcoin mb-1 text-xl"></i> <span class="text-xs font-bold" data-i18n="payBtc">BTC</span></button>
+                </div>
+            </form>
+            <div class="flex gap-2 mt-2"><button onclick="toggleModal('modal-mov')" class="flex-1 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-600 dark:text-gray-300 py-3 rounded-xl font-bold text-xs uppercase tracking-wide transition-colors"><i class="fas fa-exchange-alt mr-1"></i> <span data-i18n="btnMove">In/Out</span></button><button onclick="toggleModal('modal-cierre')" class="flex-1 w-full bg-red-50 dark:bg-red-900/20 hover:bg-red-100 dark:hover:bg-red-900/40 text-red-500 py-3 rounded-xl font-bold text-xs uppercase tracking-wide transition-colors border border-red-100 dark:border-red-900/30"><i class="fas fa-lock mr-1"></i> <span data-i18n="closeRegister">Close Z</span></button></div>
+        </div>
+    </div>
+
+    <div id="modal-alerta" class="fixed inset-0 z-[300] hidden items-center justify-center bg-black/80 backdrop-blur-sm animate-fade-in">
+        <div class="bg-white dark:bg-choco-800 p-8 rounded-3xl w-80 shadow-2xl border-2 border-gold text-center">
+            <div class="text-gold text-5xl mb-4"><i class="fas fa-exclamation-circle animate-pulse"></i></div>
+            <h3 class="text-xl font-black mb-2 text-gray-800 dark:text-white" data-i18n="modalAlertTitle">Atención</h3>
+            <p class="text-sm text-gray-500 mb-6" data-i18n="emptyCart">El carrito está vacío.</p>
+            <button onclick="toggleModal('modal-alerta')" class="w-full bg-bread hover:bg-orange-600 text-white font-bold py-3 rounded-xl shadow-lg" data-i18n="btnOk">Entendido</button>
+        </div>
+    </div>
+
+    <div id="modal-pago" class="fixed inset-0 z-[300] hidden items-center justify-center bg-black/80 backdrop-blur-sm animate-fade-in">
+        <div class="bg-white dark:bg-choco-800 p-8 rounded-3xl w-80 shadow-2xl border-2 border-green-500 text-center">
+            <div class="text-green-500 text-5xl mb-4"><i class="fas fa-cash-register animate-bounce"></i></div>
+            <h3 class="text-xl font-black mb-2 text-gray-800 dark:text-white" data-i18n="confirmPayTitle">¿Confirmar Pago?</h3>
+            <p class="text-2xl font-black text-bread dark:text-gold mb-4" id="pay-amount">$0.00</p>
+            <p class="text-sm text-gray-500 mb-2 uppercase font-bold" id="pay-method">EFECTIVO</p>
+
+            <input type="text" id="client-name" placeholder="Cliente (Opcional)" class="w-full bg-gray-100 dark:bg-choco-900 border rounded-xl p-2 mb-4 text-center font-bold outline-none focus:border-gold">
+
+            <div class="flex gap-2">
+                <button onclick="toggleModal('modal-pago')" class="flex-1 py-3 font-bold text-gray-400 hover:bg-gray-100 dark:hover:bg-white/5 rounded-xl" data-i18n="btnCancel">No</button>
+                <button onclick="submitPay()" class="flex-1 bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-xl shadow-lg" data-i18n="btnConfirm">Cobrar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-vaciar" class="fixed inset-0 z-[300] hidden items-center justify-center bg-black/80 backdrop-blur-sm animate-fade-in">
+        <div class="bg-white dark:bg-choco-800 p-8 rounded-3xl w-80 shadow-2xl border-2 border-red-500 text-center">
+            <div class="text-red-500 text-5xl mb-4"><i class="fas fa-trash-alt animate-bounce"></i></div>
+            <h3 class="text-xl font-black mb-2 text-gray-800 dark:text-white" data-i18n="modalClearTitle">¿Vaciar Carrito?</h3>
+            <p class="text-sm text-gray-500 mb-6" data-i18n="modalClearMsg">Se perderá la orden.</p>
+            <div class="flex gap-2">
+                <button onclick="toggleModal('modal-vaciar')" class="flex-1 py-3 font-bold text-gray-400 hover:bg-gray-100 dark:hover:bg-white/5 rounded-xl" data-i18n="btnCancel">No</button>
+                <button onclick="clearCart()" class="flex-1 bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-xl shadow-lg" data-i18n="btnConfirm">Sí, Borrar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-mov" class="fixed inset-0 z-[200] hidden items-center justify-center bg-black/60 backdrop-blur-sm animate-fade-in">
+        <div class="bg-white dark:bg-choco-800 p-8 rounded-3xl shadow-2xl w-96 border border-gold">
+            <h3 class="text-2xl font-black text-bread dark:text-gold mb-6 text-center" data-i18n="modalTitle">Cash Flow</h3>
+            <form action="/Caja/RegistrarMovimiento" method="post">
+                <div class="flex bg-gray-100 dark:bg-choco-900 p-1 rounded-xl mb-6"><label class="flex-1 cursor-pointer"><input type="radio" name="tipo" value="Entrada" checked class="peer hidden"><span class="block text-center py-2 rounded-lg font-bold text-sm text-gray-500 peer-checked:bg-green-500 peer-checked:text-white transition-all" data-i18n="optIn">IN</span></label><label class="flex-1 cursor-pointer"><input type="radio" name="tipo" value="Salida" class="peer hidden"><span class="block text-center py-2 rounded-lg font-bold text-sm text-gray-500 peer-checked:bg-red-500 peer-checked:text-white transition-all" data-i18n="optOut">OUT</span></label></div>
+                <div class="mb-4"><label class="block text-xs font-bold uppercase text-gray-400 mb-1 ml-1" data-i18n="lblAmount">Amount</label><input type="number" name="monto" step="0.01" required class="w-full bg-gray-50 dark:bg-choco-900 border-2 border-transparent focus:border-gold rounded-xl py-3 px-4 font-mono font-bold text-lg outline-none dark:text-white"></div>
+                <div class="mb-6"><label class="block text-xs font-bold uppercase text-gray-400 mb-1 ml-1" data-i18n="lblReason">Reason</label><input type="text" name="motivo" required placeholder="..." class="w-full bg-gray-50 dark:bg-choco-900 border-2 border-transparent focus:border-gold rounded-xl p-3 outline-none dark:text-white"></div>
+                <div class="flex gap-3"><button type="button" onclick="toggleModal('modal-mov')" class="flex-1 py-3 font-bold text-gray-400 hover:bg-gray-100 dark:hover:bg-white/5 rounded-xl transition-colors" data-i18n="btnCancel">Cancel</button><button type="submit" class="flex-1 bg-bread hover:bg-orange-600 text-white font-bold py-3 rounded-xl shadow-lg transition-all" data-i18n="btnSave">Confirm</button></div>
+            </form>
+        </div>
+    </div>
+
+    <div id="modal-cierre" class="fixed inset-0 z-[250] hidden items-center justify-center bg-black/90 backdrop-blur-md animate-fade-in">
+        <div class="bg-white dark:bg-choco-800 p-8 rounded-3xl shadow-2xl w-96 border-4 border-red-500 relative overflow-hidden">
+            <div class="absolute -right-6 -top-6 text-9xl opacity-5 text-red-500 rotate-12"><i class="fas fa-file-invoice-dollar"></i></div>
+            <h3 class="text-3xl font-black text-red-500 mb-2 text-center uppercase tracking-widest border-b-2 border-red-100 pb-2">Reporte Z</h3>
+            <p class="text-center text-xs text-gray-400 mb-6 uppercase tracking-widest">Resumen de Turno #@ViewBag.TurnoId</p>
+            <div class="space-y-3 mb-8 font-mono text-sm">
+                <div class="flex justify-between items-center text-gray-500"><span>Monto Inicial:</span><span class="font-bold text-gray-800 dark:text-gray-200">$@montoInicial.ToString("0.00")</span></div>
+                <div class="flex justify-between items-center text-green-600"><span>+ Ventas:</span><span class="font-bold">$@ventas.ToString("0.00")</span></div>
+                <div class="flex justify-between items-center text-blue-500"><span>+ Entradas:</span><span class="font-bold">$@entradas.ToString("0.00")</span></div>
+                <div class="flex justify-between items-center text-red-500"><span>- Salidas:</span><span class="font-bold">($@salidas.ToString("0.00"))</span></div>
+                <div class="border-t-2 border-dashed border-gray-300 dark:border-gray-600 my-2 pt-2 flex justify-between items-end"><span class="text-xs uppercase font-bold text-gray-400">Total en Caja:</span><span class="text-3xl font-black text-bread dark:text-gold">$@totalCaja.ToString("0.00")</span></div>
+            </div>
+            <form action="/Caja/CerrarTurno" method="post" class="flex gap-3"><button type="button" onclick="toggleModal('modal-cierre')" class="flex-1 py-3 font-bold text-gray-400 hover:bg-gray-100 dark:hover:bg-white/5 rounded-xl transition-colors">Volver</button><button type="submit" class="flex-1 bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-xl shadow-lg transition-all flex justify-center items-center gap-2"><i class="fas fa-check-circle"></i> Confirmar</button></form>
+        </div>
+    </div>
+
+    <script>
+        let cart = []; let lang = localStorage.getItem('bakeryLang') || 'en'; let pendingMethod = '';
+        const i18n = {
+            en: {
+                pageTitle: "Pan y Lujo", shift: "Shift", currentOrder: "Current Order", subtotal: "Subtotal", tax: "Tax (18%)", total: "Total",
+                payCash: "CASH", payCard: "CARD", payBtc: "BTC", catAll: "All", catBreads: "Breads", catDrinks: "Drinks", catDesserts: "Desserts",
+                emptyCart: "Cart is empty", btnMove: "In/Out", closeRegister: "Close Z", modalTitle: "Cash Flow",
+                optIn: "IN (Deposit)", optOut: "OUT (Expense)", lblAmount: "Amount", lblReason: "Reason",
+                btnCancel: "Cancel", btnSave: "Confirm", btnConfirm: "Confirm", confirmPayTitle: "Confirm Payment?", using: "using",
+                soldOut: "SOLD OUT", soldOutStamp: "SOLD OUT", modalClearTitle: "Clear Cart?", modalClearMsg: "Current order will be lost.",
+                modalAlertTitle: "Warning", btnOk: "Understood"
+            },
+            es: {
+                pageTitle: "Pan y Lujo", shift: "Turno", currentOrder: "Orden Actual", subtotal: "Subtotal", tax: "Impuesto (18%)", total: "Total",
+                payCash: "EFECTIVO", payCard: "TARJETA", payBtc: "BTC", catAll: "Todo", catBreads: "Panes", catDrinks: "Bebidas", catDesserts: "Postres",
+                emptyCart: "Carrito vacío", btnMove: "Movimientos", closeRegister: "Cerrar Caja", modalTitle: "Flujo de Caja",
+                optIn: "ENTRADA", optOut: "SALIDA", lblAmount: "Monto", lblReason: "Motivo",
+                btnCancel: "Cancelar", btnSave: "Confirmar", btnConfirm: "Sí, Confirmar", confirmPayTitle: "¿Cobrar Orden?", using: "usando",
+                soldOut: "AGOTADO", soldOutStamp: "AGOTADO", modalClearTitle: "¿Vaciar Carrito?", modalClearMsg: "Se perderá la orden actual.",
+                modalAlertTitle: "Atención", btnOk: "Entendido"
+            },
+            fr: {
+                pageTitle: "Pan y Lujo", shift: "Quart", currentOrder: "Commande", subtotal: "Sous-total", tax: "TVA (18%)", total: "Total",
+                payCash: "ESPÈCES", payCard: "CARTE", payBtc: "BTC", catAll: "Tous", catBreads: "Pains", catDrinks: "Boissons", catDesserts: "Desserts",
+                emptyCart: "Panier vide", btnMove: "Entrée/Sortie", closeRegister: "Fermer Z", modalTitle: "Flux de Trésorerie",
+                optIn: "ENTRÉE", optOut: "SORTIE", lblAmount: "Montant", lblReason: "Raison",
+                btnCancel: "Annuler", btnSave: "Confirmer", btnConfirm: "Oui, Confirmer", confirmPayTitle: "Confirmer Paiement?", using: "avec",
+                soldOut: "ÉPUISÉ", soldOutStamp: "ÉPUISÉ", modalClearTitle: "Vider le panier?", modalClearMsg: "La commande sera perdue.",
+                modalAlertTitle: "Attention", btnOk: "Compris"
+            }
+        };
+        const prodTrans = { "Pan Sobao": { en: "Sweet Bread", fr: "Pain Doux" }, "Pan de Agua": { en: "Water Bread", fr: "Pain à l'eau" }, "Café Expreso": { en: "Espresso", fr: "Espresso" }, "Jugo Naranja": { en: "Orange Juice", fr: "Jus d'Orange" }, "Dona Glaseada": { en: "Glazed Donut", fr: "Beignet Glacé" }, "Pastel de Chocolate": { en: "Chocolate Cake", fr: "Gâteau au Chocolat" }, "Sandwich Jamón": { en: "Ham Sandwich", fr: "Sandwich Jambon" }, "Croissant": { en: "Croissant", fr: "Croissant" } };
+        document.addEventListener('DOMContentLoaded', () => { setLang(lang); initTheme(); renderCart(); });
+        function t_prod(originalName) { if (lang === 'es') return originalName; if (prodTrans[originalName] && prodTrans[originalName][lang]) { return prodTrans[originalName][lang]; } return originalName; }
+        function toggleLangMenu(event) { event.stopPropagation(); document.getElementById('lang-menu').classList.toggle('hidden'); }
+        function closeMenus(event) { const menu = document.getElementById('lang-menu'); const btn = document.getElementById('btn-lang'); if (!menu.contains(event.target) && !btn.contains(event.target)) { menu.classList.add('hidden'); } }
+        function initTheme() { if (localStorage.getItem('theme') === 'light') { document.documentElement.classList.remove('dark'); document.getElementById('theme-icon').innerText = '🍦'; } else { document.documentElement.classList.add('dark'); document.getElementById('theme-icon').innerText = '🍫'; } }
+        function toggleTheme() { const html = document.documentElement; if (html.classList.contains('dark')) { html.classList.remove('dark'); localStorage.setItem('theme', 'light'); document.getElementById('theme-icon').innerText = '🍦'; } else { html.classList.add('dark'); localStorage.setItem('theme', 'dark'); document.getElementById('theme-icon').innerText = '🍫'; } }
+        function setLang(selectedLang) { lang = selectedLang; localStorage.setItem('bakeryLang', lang); document.getElementById('lang-label').innerText = lang.toUpperCase(); document.querySelectorAll('[data-i18n]').forEach(el => { const key = el.getAttribute('data-i18n'); if (i18n[lang][key]) el.innerText = i18n[lang][key]; }); document.querySelectorAll('[data-prod-name]').forEach(el => { const original = el.getAttribute('data-prod-name'); el.innerText = t_prod(original); }); renderCart(); document.getElementById('lang-menu').classList.add('hidden'); }
+        function addToCart(id, name, price) { const existing = cart.find(x => x.id === id); if (existing) existing.qty++; else cart.push({ id: id, originalName: name, price: price, qty: 1 }); const icon = document.querySelector('.fa-receipt'); icon.classList.add('fa-bounce'); setTimeout(() => icon.classList.remove('fa-bounce'), 500); renderCart(); }
+        function renderCart() {
+            const list = document.getElementById('cart-list'); const trashBtn = document.getElementById('btn-trash'); list.innerHTML = ''; let subtotal = 0;
+            if (cart.length === 0) { trashBtn.classList.add('opacity-0', 'pointer-events-none'); list.innerHTML = `<div class="flex flex-col items-center justify-center h-64 text-gray-400 opacity-60"><i class="fas fa-cookie-bite text-5xl mb-4"></i><p class="text-sm italic">${i18n[lang].emptyCart}</p></div>`; } else { trashBtn.classList.remove('opacity-0', 'pointer-events-none'); }
+            cart.forEach((item, index) => { const total = item.price * item.qty; subtotal += total; const displayName = t_prod(item.originalName); list.innerHTML += `<div class="flex justify-between items-center bg-white dark:bg-choco-700 p-3 rounded-xl shadow-sm border-l-4 border-gold animate-fade-in group"><div class="flex-grow"><div class="font-bold text-gray-800 dark:text-gray-100">${displayName}</div><div class="text-xs text-gray-500 dark:text-gray-400 flex items-center mt-1"><span class="font-mono">$${item.price.toFixed(2)}</span><span class="mx-2 text-gold">x</span><div class="flex items-center bg-gray-100 dark:bg-choco-900 rounded-lg"><button onclick="changeQty(${index}, -1)" class="px-2 hover:text-red-500 transition">-</button><span class="px-1 font-bold">${item.qty}</span><button onclick="changeQty(${index}, 1)" class="px-2 hover:text-green-500 transition">+</button></div></div></div><div class="text-right"><div class="font-bold font-mono text-bread dark:text-gold">$${total.toFixed(2)}</div><button onclick="removeItem(${index})" class="text-xs text-red-300 hover:text-red-500 mt-1 opacity-0 group-hover:opacity-100 transition"><i class="fas fa-trash"></i></button></div></div>`; });
+            const tax = subtotal * 0.18; const finalTotal = subtotal + tax; document.getElementById('lbl-subtotal').innerText = '$' + subtotal.toFixed(2); document.getElementById('lbl-tax').innerText = '$' + tax.toFixed(2); document.getElementById('lbl-total').innerText = '$' + finalTotal.toFixed(2); document.getElementById('input-total').value = finalTotal.toFixed(2); document.getElementById('input-json').value = JSON.stringify(cart.map(c => ({ id:c.id, nombre:c.originalName, precio:c.price, cantidad:c.qty })));
+        }
+        function changeQty(index, delta) { cart[index].qty += delta; if (cart[index].qty <= 0) cart.splice(index, 1); renderCart(); }
+        function removeItem(index) { cart.splice(index, 1); renderCart(); }
+
+        // --- MODALES Y LÓGICA DE COBRO ---
+        function askClearCart() { if (cart.length === 0) return; toggleModal('modal-vaciar'); }
+        function clearCart() { cart = []; renderCart(); toggleModal('modal-vaciar'); }
+        function filter(cat, btn) { document.querySelectorAll('.tab-btn').forEach(b => { b.classList.remove('bg-bread', 'text-white', 'active', 'shadow-lg'); b.classList.add('bg-white', 'dark:bg-choco-700', 'text-gray-500', 'dark:text-gray-400'); }); btn.classList.remove('bg-white', 'dark:bg-choco-700', 'text-gray-500', 'dark:text-gray-400'); btn.classList.add('bg-bread', 'text-white', 'active', 'shadow-lg'); document.querySelectorAll('.prod-card').forEach(card => { if (cat === 'all' || card.dataset.cat === cat) { card.classList.remove('hidden-product'); card.classList.add('animate-fade-in'); } else { card.classList.add('hidden-product'); } }); }
+        function toggleModal(id) { const el = document.getElementById(id); if (el.classList.contains('hidden')) { el.classList.remove('hidden'); el.classList.add('flex'); } else { el.classList.add('hidden'); el.classList.remove('flex'); } }
+
+        function pay(method) {
+            if (cart.length === 0) { toggleModal('modal-alerta'); return; }
+            pendingMethod = method;
+            document.getElementById('pay-amount').innerText = document.getElementById('lbl-total').innerText;
+            document.getElementById('pay-method').innerText = method.toUpperCase();
+            // Limpiar input cliente
+            document.getElementById('client-name').value = '';
+            toggleModal('modal-pago');
+        }
+        function submitPay() {
+            document.getElementById('input-method').value = pendingMethod;
+            // Pasar nombre del cliente al form oculto
+            document.getElementById('input-client').value = document.getElementById('client-name').value;
+            document.getElementById('form-pay').submit();
+        }
+    </script>
+</body>
+</html>
+

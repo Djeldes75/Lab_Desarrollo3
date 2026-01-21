@@ -1,0 +1,19 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html class="dark">
+<head>
+    <meta charset="utf-8" />
+    <title>Error - Pan y Lujo</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🥐</text></svg>">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { choco: { 900: '#1a0f0a' }, bread: '#d97706' } } } }</script>
+</head>
+<body class="bg-choco-900 h-screen flex flex-col items-center justify-center text-white p-4 text-center">
+    <div class="text-9xl mb-4 animate-bounce">🥐</div>
+    <h1 class="text-6xl font-black text-bread mb-4">Oops!</h1>
+    <p class="text-xl opacity-60 mb-8">Algo se quemó en el horno.</p>
+    <a href="/" class="bg-bread hover:bg-orange-600 px-8 py-4 rounded-xl font-bold shadow-lg transition transform hover:-translate-y-1">Volver al Inicio</a>
+</body>
+</html>

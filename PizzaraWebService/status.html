@@ -1,0 +1,159 @@
+﻿<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <title>Pizarra Baseball - API Status</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <style>
+        body {
+            font-family: Segoe UI, Roboto, Arial;
+            background: #f5f7fb;
+            color: #222;
+            padding: 24px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            max-width: 760px;
+            margin: 20px auto;
+            box-shadow: 0 6px 20px rgba(30,40,50,0.06);
+        }
+
+        h1 {
+            margin: 0 0 8px;
+            color: #0b63c9;
+        }
+
+        p.lead {
+            margin: 6px 0 18px;
+            color: #555;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 8px 10px;
+            margin-top: 6px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+
+        button {
+            margin-top: 12px;
+            background: #0b63c9;
+            color: white;
+            border: none;
+            padding: 10px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        pre {
+            background: #0f1720;
+            color: #e6eef8;
+            padding: 12px;
+            border-radius: 6px;
+            overflow: auto;
+        }
+
+        .row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        @media(max-width:700px) {
+            .row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Pizarra Baseball — API</h1>
+        <p class="lead">Estado: <strong id="status">Verificando...</strong></p>
+
+        <h3>Enviar evento (prueba)</h3>
+        <div>
+            <div class="row">
+                <div>
+                    <label>IdJuego</label>
+                    <input id="idJuego" value="JUEGO-001" />
+                </div>
+                <div>
+                    <label>Carrera</label>
+                    <input id="carrera" value="1" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div>
+                    <label>Inning</label>
+                    <input id="inning" value="3" />
+                </div>
+                <div>
+                    <label>Pelotero</label>
+                    <input id="pelotero" value="Juan Perez" />
+                </div>
+            </div>
+
+            <label>Abre</label>
+            <input id="abre" value="Licey" />
+            <label>Cierra</label>
+            <input id="cierra" value="Las Aguilas" />
+
+            <button id="send">Enviar evento</button>
+
+            <h4>Respuesta</h4>
+            <pre id="result">—</pre>
+        </div>
+    </div>
+
+    <script>
+    const base = location.origin + '/';
+    async function check() {
+      try {
+        const r = await fetch(base + 'api/pizarra/evento', { method: 'OPTIONS' });
+        document.getElementById('status').innerText = 'API disponible';
+      } catch (e) {
+        document.getElementById('status').innerText = 'API no disponible';
+      }
+    }
+    check();
+
+    document.getElementById('send').addEventListener('click', async () => {
+      const payload = {
+        IdJuego: document.getElementById('idJuego').value,
+        Carrera: parseInt(document.getElementById('carrera').value || '0'),
+        Inning: parseInt(document.getElementById('inning').value || '1'),
+        Abre: document.getElementById('abre').value,
+        Cierra: document.getElementById('cierra').value,
+        Pelotero: document.getElementById('pelotero').value,
+        FechaEvento: new Date().toISOString()
+      };
+
+      try {
+        const r = await fetch(base + 'api/pizarra/evento', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const text = await r.text();
+        document.getElementById('result').innerText = text;
+      } catch (ex) {
+        document.getElementById('result').innerText = 'ERROR: ' + ex.message;
+      }
+    });
+    </script>
+</body>
+</html>

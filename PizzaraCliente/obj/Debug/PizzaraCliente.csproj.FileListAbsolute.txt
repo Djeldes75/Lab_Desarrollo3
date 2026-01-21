@@ -1,0 +1,12 @@
+C:\VS_Projects\DS3\Laboratorio\PizzaraCliente\bin\Debug\PizarraBaseball.mdf
+C:\VS_Projects\DS3\Laboratorio\PizzaraCliente\bin\Debug\PizarraBaseball_log.ldf
+C:\VS_Projects\DS3\Laboratorio\PizzaraCliente\bin\Debug\PizzaraCliente.exe.config
+C:\VS_Projects\DS3\Laboratorio\PizzaraCliente\bin\Debug\PizzaraCliente.exe
+C:\VS_Projects\DS3\Laboratorio\PizzaraCliente\bin\Debug\PizzaraCliente.pdb
+C:\VS_Projects\DS3\Laboratorio\PizzaraCliente\bin\Debug\Newtonsoft.Json.dll
+C:\VS_Projects\DS3\Laboratorio\PizzaraCliente\bin\Debug\Newtonsoft.Json.xml
+C:\VS_Projects\DS3\Laboratorio\PizzaraCliente\obj\Debug\PizzaraCliente.csproj.AssemblyReference.cache
+C:\VS_Projects\DS3\Laboratorio\PizzaraCliente\obj\Debug\PizzaraCliente.csproj.CoreCompileInputs.cache
+C:\VS_Projects\DS3\Laboratorio\PizzaraCliente\obj\Debug\PizzaraC.C83CDA58.Up2Date
+C:\VS_Projects\DS3\Laboratorio\PizzaraCliente\obj\Debug\PizzaraCliente.exe
+C:\VS_Projects\DS3\Laboratorio\PizzaraCliente\obj\Debug\PizzaraCliente.pdb

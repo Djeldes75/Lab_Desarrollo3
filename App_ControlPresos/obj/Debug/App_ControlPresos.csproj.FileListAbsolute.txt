@@ -1,0 +1,9 @@
+C:\VS_Projects\DS3\Laboratorio\App_ControlPresos\bin\Debug\DatabasePresos.mdf
+C:\VS_Projects\DS3\Laboratorio\App_ControlPresos\bin\Debug\DatabasePresos_log.ldf
+C:\VS_Projects\DS3\Laboratorio\App_ControlPresos\bin\Debug\App_ControlPresos.exe.config
+C:\VS_Projects\DS3\Laboratorio\App_ControlPresos\bin\Debug\App_ControlPresos.exe
+C:\VS_Projects\DS3\Laboratorio\App_ControlPresos\bin\Debug\App_ControlPresos.pdb
+C:\VS_Projects\DS3\Laboratorio\App_ControlPresos\obj\Debug\App_ControlPresos.csproj.AssemblyReference.cache
+C:\VS_Projects\DS3\Laboratorio\App_ControlPresos\obj\Debug\App_ControlPresos.csproj.CoreCompileInputs.cache
+C:\VS_Projects\DS3\Laboratorio\App_ControlPresos\obj\Debug\App_ControlPresos.exe
+C:\VS_Projects\DS3\Laboratorio\App_ControlPresos\obj\Debug\App_ControlPresos.pdb

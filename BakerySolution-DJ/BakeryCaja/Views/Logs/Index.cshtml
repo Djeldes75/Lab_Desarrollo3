@@ -1,0 +1,116 @@
+﻿@model List<BakeryCaja.Models.AuditLog>
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="utf-8" />
+    <title>Logs - Pan y Lujo</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🥐</text></svg>">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { choco: { 900: '#1a0f0a', 800: '#2d1b14', 700: '#4a2c21', 600: '#5d3a2e' }, cream: { 100: '#fffbf0', 200: '#ffefd5', 300: '#ffe0b2' }, gold: '#ffc107', bread: '#d97706' } } } }</script>
+    <style>
+        @@media print {
+            .no-print {
+                display: none !important;
+            }
+
+            .print-only {
+                display: block !important;
+            }
+
+            body {
+                background: white !important;
+                color: black !important;
+                font-family: 'Times New Roman', serif;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 20px;
+                font-size: 10pt;
+            }
+
+            th {
+                background-color: #f0f0f0 !important;
+                color: black !important;
+                border: 1px solid #ccc;
+                padding: 5px;
+                text-align: left;
+            }
+
+            td {
+                border: 1px solid #ccc;
+                padding: 5px;
+            }
+
+            @@page {
+                size: A4;
+                margin: 2cm;
+            }
+        }
+
+        .print-only {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-cream-100 dark:bg-choco-900 text-gray-800 dark:text-gray-100 min-h-screen p-8 font-sans transition-colors duration-300">
+
+    <div class="max-w-6xl mx-auto flex justify-between items-center mb-8 bg-white dark:bg-choco-800 p-6 rounded-3xl shadow-xl border border-gold/30 no-print">
+        <div class="flex items-center gap-4"><div class="bg-blue-500 p-3 rounded-2xl text-white shadow-lg"><i class="fas fa-list-ul text-3xl"></i></div><div><h1 class="text-3xl font-black text-bread dark:text-gold uppercase" data-i18n="titleLogs">Logs de Sistema</h1><p class="text-sm opacity-60" data-i18n="descLogs">Auditoría</p></div></div>
+        <div class="flex items-center gap-3">
+            <button onclick="toggleTheme()" class="w-10 h-10 rounded-full bg-cream-200 dark:bg-choco-700 hover:scale-110 transition flex items-center justify-center text-lg"><span id="theme-icon">🍫</span></button>
+            <button id="btn-lang" onclick="toggleLang()" class="w-10 h-10 rounded-full bg-cream-200 dark:bg-choco-700 hover:scale-110 transition flex items-center justify-center font-bold text-xs mr-4"><span id="lang-label">EN</span></button>
+            <a href="/Admin/Index" class="bg-gray-200 dark:bg-choco-700 hover:bg-gray-300 px-4 py-2 rounded-xl font-bold transition"><i class="fas fa-arrow-left"></i> <span data-i18n="btnBack">Volver</span></a>
+        </div>
+    </div>
+
+    <div class="print-only text-center mb-8">
+        <h1 style="font-size: 24pt; font-weight: bold;">Pan y Lujo - Auditoría de Sistema</h1>
+        <p>Generado el: @DateTime.Now.ToString("dd/MM/yyyy HH:mm")</p>
+        <hr style="margin-top: 10px; border: 1px solid black;">
+    </div>
+
+    <div class="max-w-6xl mx-auto bg-white dark:bg-choco-800 rounded-3xl shadow-lg border border-gray-200 dark:border-choco-600 overflow-hidden">
+        <div class="p-4 bg-cream-200 dark:bg-choco-700 flex justify-end gap-2 no-print">
+            <button onclick="exportTableToCSV('logs.csv')" class="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 text-xs font-bold shadow"><i class="fas fa-file-excel"></i> Excel</button>
+            <button onclick="window.print()" class="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 text-xs font-bold shadow"><i class="fas fa-file-pdf"></i> PDF</button>
+        </div>
+
+        <table class="w-full text-left">
+            <thead class="bg-gray-5 dark:bg-choco-900/50 text-xs uppercase opacity-70"><tr><th class="p-4" data-i18n="colDate">Fecha</th><th class="p-4" data-i18n="colUser">Usuario</th><th class="p-4" data-i18n="colAction">Acción</th><th class="p-4" data-i18n="colDetails">Detalles</th></tr></thead>
+            <tbody class="divide-y divide-gray-200 dark:divide-choco-600">
+                @foreach (var l in Model)
+                {
+                    <tr class="hover:bg-cream-100 dark:hover:bg-choco-700/50 transition">
+                        <td class="p-4 font-mono text-sm opacity-70">@l.Fecha.ToString("dd/MM/yyyy HH:mm:ss")</td>
+                        <td class="p-4 font-bold">@l.Usuario</td>
+                        <td class="p-4"><span class="bg-blue-100 text-blue-700 px-2 py-1 rounded text-xs font-bold">@l.Accion</span></td>
+                        <td class="p-4 text-sm">@l.Detalles</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        let lang = localStorage.getItem('bakeryLang') || 'en';
+        const i18n = {
+            en: { titleLogs: "System Logs", descLogs: "Audit Trail", colDate: "Date", colUser: "User", colAction: "Action", colDetails: "Details", btnBack: "Back" },
+            es: { titleLogs: "Logs del Sistema", descLogs: "Auditoría de Acciones", colDate: "Fecha", colUser: "Usuario", colAction: "Acción", colDetails: "Detalles", btnBack: "Volver" },
+            fr: { titleLogs: "Journaux Système", descLogs: "Piste d'audit", colDate: "Date", colUser: "Utilisateur", colAction: "Action", colDetails: "Détails", btnBack: "Retour" }
+        };
+        document.addEventListener('DOMContentLoaded', () => { initTheme(); setLang(lang); });
+        function toggleLang() { const langs = ['en', 'es', 'fr']; let idx = langs.indexOf(lang); lang = langs[(idx + 1) % 3]; setLang(lang); }
+        function setLang(l) { lang = l; localStorage.setItem('bakeryLang', l); document.getElementById('lang-label').innerText = l.toUpperCase(); document.querySelectorAll('[data-i18n]').forEach(el => { if(i18n[l][el.dataset.i18n]) el.innerText = i18n[l][el.dataset.i18n]; }); }
+        function initTheme() { if(localStorage.getItem('theme')==='light'){document.documentElement.classList.remove('dark');document.getElementById('theme-icon').innerText='🍦';}else{document.documentElement.classList.add('dark');document.getElementById('theme-icon').innerText='🍫';} }
+        function toggleTheme() { if(document.documentElement.classList.contains('dark')){document.documentElement.classList.remove('dark');localStorage.setItem('theme','light');document.getElementById('theme-icon').innerText='🍦';}else{document.documentElement.classList.add('dark');localStorage.setItem('theme','dark');document.getElementById('theme-icon').innerText='🍫';} }
+        function exportTableToCSV(filename) { var csv = []; var rows = document.querySelectorAll("table tr"); for (var i = 0; i < rows.length; i++) { var row = [], cols = rows[i].querySelectorAll("td, th"); for (var j = 0; j < cols.length; j++) row.push(cols[j].innerText); csv.push(row.join(",")); } var csvFile = new Blob([csv.join("\n")], {type: "text/csv"}); var downloadLink = document.createElement("a"); downloadLink.download = filename; downloadLink.href = window.URL.createObjectURL(csvFile); downloadLink.style.display = "none"; document.body.appendChild(downloadLink); downloadLink.click(); }
+    </script>
+</body>
+</html>
+

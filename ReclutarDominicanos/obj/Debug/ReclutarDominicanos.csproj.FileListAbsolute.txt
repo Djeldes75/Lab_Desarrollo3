@@ -1,0 +1,9 @@
+C:\Users\Dominique Jeldes\Desktop\DS3 (T-L)\Laboratorio\ReclutarDominicanos\bin\Debug\Reclutamiento.mdf
+C:\Users\Dominique Jeldes\Desktop\DS3 (T-L)\Laboratorio\ReclutarDominicanos\bin\Debug\Reclutamiento_log.ldf
+C:\Users\Dominique Jeldes\Desktop\DS3 (T-L)\Laboratorio\ReclutarDominicanos\bin\Debug\ReclutarDominicanos.exe.config
+C:\Users\Dominique Jeldes\Desktop\DS3 (T-L)\Laboratorio\ReclutarDominicanos\bin\Debug\ReclutarDominicanos.exe
+C:\Users\Dominique Jeldes\Desktop\DS3 (T-L)\Laboratorio\ReclutarDominicanos\bin\Debug\ReclutarDominicanos.pdb
+C:\Users\Dominique Jeldes\Desktop\DS3 (T-L)\Laboratorio\ReclutarDominicanos\obj\Debug\ReclutarDominicanos.csproj.AssemblyReference.cache
+C:\Users\Dominique Jeldes\Desktop\DS3 (T-L)\Laboratorio\ReclutarDominicanos\obj\Debug\ReclutarDominicanos.csproj.CoreCompileInputs.cache
+C:\Users\Dominique Jeldes\Desktop\DS3 (T-L)\Laboratorio\ReclutarDominicanos\obj\Debug\ReclutarDominicanos.exe
+C:\Users\Dominique Jeldes\Desktop\DS3 (T-L)\Laboratorio\ReclutarDominicanos\obj\Debug\ReclutarDominicanos.pdb

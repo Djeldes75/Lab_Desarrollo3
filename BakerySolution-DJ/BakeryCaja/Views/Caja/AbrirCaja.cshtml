@@ -1,0 +1,43 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <title>Apertura de Caja</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white h-screen flex items-center justify-center">
+
+    <div class="text-center w-full max-w-md p-6 bg-gray-800 rounded-xl shadow-2xl border border-gray-700">
+
+        <div class="mb-6">
+            <span class="text-6xl">🔒</span>
+            <h1 class="text-2xl font-bold mt-4">La Caja está Cerrada</h1>
+            <p class="text-gray-400">Debes iniciar un turno para vender.</p>
+        </div>
+
+        <form action="/Caja/AbrirTurno" method="post" class="space-y-4">
+
+            <div class="text-left">
+                <label class="block text-sm text-gray-300 mb-1">Fondo de Caja (Monto Inicial)</label>
+                <div class="relative">
+                    <span class="absolute left-3 top-2 text-gray-500">$</span>
+                    <input type="number" name="montoInicial" step="0.01" value="0.00"
+                           class="w-full bg-gray-700 border border-gray-600 rounded px-8 py-2 text-white focus:outline-none focus:border-green-500 font-mono text-lg" />
+                </div>
+            </div>
+
+            <button type="submit"
+                    class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded transition shadow-lg shadow-green-900/50">
+                ABRIR CAJA
+            </button>
+        </form>
+
+        <a href="/Access/Logout" class="block mt-6 text-sm text-gray-500 hover:text-gray-300">Cerrar Sesión</a>
+    </div>
+
+</body>
+</html>
+

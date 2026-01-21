@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "DenunciasService\\DenunciasService.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "DenunciasClient\\DenunciasClient.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

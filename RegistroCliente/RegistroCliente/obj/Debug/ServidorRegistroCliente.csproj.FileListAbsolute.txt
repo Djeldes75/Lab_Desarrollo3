@@ -1,0 +1,16 @@
+C:\VS_Projects\DS3\Laboratorio\RegistroCliente\RegistroCliente\bin\Debug\Data\RegistroClientes.mdf
+C:\VS_Projects\DS3\Laboratorio\RegistroCliente\RegistroCliente\bin\Debug\Data\RegistroClientes_log.ldf
+C:\VS_Projects\DS3\Laboratorio\RegistroCliente\RegistroCliente\bin\Debug\Logs\log4net.config
+C:\VS_Projects\DS3\Laboratorio\RegistroCliente\RegistroCliente\bin\Debug\RegistroCliente.exe.config
+C:\VS_Projects\DS3\Laboratorio\RegistroCliente\RegistroCliente\bin\Debug\RegistroCliente.exe
+C:\VS_Projects\DS3\Laboratorio\RegistroCliente\RegistroCliente\bin\Debug\RegistroCliente.pdb
+C:\VS_Projects\DS3\Laboratorio\RegistroCliente\RegistroCliente\bin\Debug\log4net.dll
+C:\VS_Projects\DS3\Laboratorio\RegistroCliente\RegistroCliente\bin\Debug\Newtonsoft.Json.dll
+C:\VS_Projects\DS3\Laboratorio\RegistroCliente\RegistroCliente\bin\Debug\log4net.pdb
+C:\VS_Projects\DS3\Laboratorio\RegistroCliente\RegistroCliente\bin\Debug\log4net.xml
+C:\VS_Projects\DS3\Laboratorio\RegistroCliente\RegistroCliente\bin\Debug\Newtonsoft.Json.xml
+C:\VS_Projects\DS3\Laboratorio\RegistroCliente\RegistroCliente\obj\Debug\ServidorRegistroCliente.csproj.AssemblyReference.cache
+C:\VS_Projects\DS3\Laboratorio\RegistroCliente\RegistroCliente\obj\Debug\ServidorRegistroCliente.csproj.CoreCompileInputs.cache
+C:\VS_Projects\DS3\Laboratorio\RegistroCliente\RegistroCliente\obj\Debug\Servidor.58872050.Up2Date
+C:\VS_Projects\DS3\Laboratorio\RegistroCliente\RegistroCliente\obj\Debug\RegistroCliente.exe
+C:\VS_Projects\DS3\Laboratorio\RegistroCliente\RegistroCliente\obj\Debug\RegistroCliente.pdb

@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="../PizzaraCliente/PizzaraCliente.csproj" Id="2ef7a9c5-f244-4bb0-bea9-4cd65521a331" />
+  <Project Path="../PizzaraWebService/PizzaraWebService.csproj" Id="0c454d0a-f1c5-41e5-93bc-e8bed1579642" />
+</Solution>

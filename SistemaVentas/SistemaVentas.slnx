@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="ClientUI/ClientUI.csproj" />
+  <Project Path="Sales.Messages/Sales.Messages.csproj" />
+  <Project Path="Sales/Sales.csproj" />
+</Solution>

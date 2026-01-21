@@ -1,0 +1,9 @@
+C:\VS_Projects\DS3\Laboratorio\App_VentaTickets-Ilegal\bin\Debug\DB-Ticketsilegales.mdf
+C:\VS_Projects\DS3\Laboratorio\App_VentaTickets-Ilegal\bin\Debug\DB-Ticketsilegales_log.ldf
+C:\VS_Projects\DS3\Laboratorio\App_VentaTickets-Ilegal\bin\Debug\App_VentaTickets-Ilegal.exe.config
+C:\VS_Projects\DS3\Laboratorio\App_VentaTickets-Ilegal\bin\Debug\App_VentaTickets-Ilegal.exe
+C:\VS_Projects\DS3\Laboratorio\App_VentaTickets-Ilegal\bin\Debug\App_VentaTickets-Ilegal.pdb
+C:\VS_Projects\DS3\Laboratorio\App_VentaTickets-Ilegal\obj\Debug\App_VentaTickets-Ilegal.csproj.AssemblyReference.cache
+C:\VS_Projects\DS3\Laboratorio\App_VentaTickets-Ilegal\obj\Debug\App_VentaTickets-Ilegal.csproj.CoreCompileInputs.cache
+C:\VS_Projects\DS3\Laboratorio\App_VentaTickets-Ilegal\obj\Debug\App_VentaTickets-Ilegal.exe
+C:\VS_Projects\DS3\Laboratorio\App_VentaTickets-Ilegal\obj\Debug\App_VentaTickets-Ilegal.pdb

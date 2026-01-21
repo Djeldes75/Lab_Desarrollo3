@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36705.20 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App_VentaTickets-Ilegal", "App_VentaTickets-Ilegal.csproj", "{2B717F77-D33D-4D1A-8300-B417893136D5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2B717F77-D33D-4D1A-8300-B417893136D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B717F77-D33D-4D1A-8300-B417893136D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B717F77-D33D-4D1A-8300-B417893136D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B717F77-D33D-4D1A-8300-B417893136D5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F344A808-C0BE-4452-985C-E6EE3CD20029}
+	EndGlobalSection
+EndGlobal

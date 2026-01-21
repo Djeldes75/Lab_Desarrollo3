@@ -1,0 +1,200 @@
+﻿@model List<BakeryCaja.Models.User>
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="utf-8" />
+    <title>Admin - Pan y Lujo</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🥐</text></svg>">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = { darkMode: 'class', theme: { extend: { colors: { choco: { 900: '#1a0f0a', 800: '#2d1b14', 700: '#4a2c21', 600: '#5d3a2e' }, cream: { 100: '#fffbf0', 200: '#ffefd5', 300: '#ffe0b2' }, gold: '#ffc107', bread: '#d97706' } } } }
+    </script>
+    <style>
+        @@media print {
+            .no-print {
+                display: none !important;
+            }
+
+            body {
+                background: white;
+                color: black;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            th, td {
+                border: 1px solid black;
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-cream-100 dark:bg-choco-900 text-gray-800 dark:text-gray-100 min-h-screen p-8 font-sans transition-colors duration-300">
+
+    <div class="max-w-6xl mx-auto flex justify-between items-center mb-8 bg-white dark:bg-choco-800 p-6 rounded-3xl shadow-xl border border-gold/30 no-print">
+        <div class="flex items-center gap-4">
+            <div class="bg-gold p-3 rounded-2xl text-choco-900 shadow-lg"><i class="fas fa-user-shield text-3xl"></i></div>
+            <div><h1 class="text-3xl font-black text-bread dark:text-gold uppercase" data-i18n="titleAdmin">ADMINISTRACIÓN</h1><p class="text-sm opacity-60" data-i18n="descAdmin">Gestión de Usuarios</p></div>
+        </div>
+        <div class="flex gap-3 items-center">
+            <button onclick="toggleTheme()" class="w-10 h-10 rounded-full bg-cream-200 dark:bg-choco-700 hover:scale-110 transition flex items-center justify-center text-lg"><span id="theme-icon">🍫</span></button>
+            <button id="btn-lang" onclick="toggleLang()" class="w-10 h-10 rounded-full bg-cream-200 dark:bg-choco-700 hover:scale-110 transition flex items-center justify-center font-bold text-xs mr-4"><span id="lang-label">EN</span></button>
+
+            <a href="/Logs/Index" class="bg-blue-100 hover:bg-blue-200 text-blue-800 px-4 py-3 rounded-xl font-bold transition flex items-center"><i class="fas fa-list-ul mr-2"></i> Logs</a>
+            <a href="/Reportes/Index" class="bg-green-100 hover:bg-green-200 text-green-800 px-4 py-3 rounded-xl font-bold transition flex items-center"><i class="fas fa-chart-pie mr-2"></i> <span data-i18n="btnFin">Finanzas</span></a>
+            <a href="/Access/Logout" class="bg-red-500 hover:bg-red-600 text-white px-4 py-3 rounded-xl font-bold shadow-lg transition"><i class="fas fa-sign-out-alt"></i></a>
+        </div>
+    </div>
+
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="md:col-span-1 no-print">
+            <div class="bg-white dark:bg-choco-800 p-6 rounded-3xl shadow-lg border border-gray-200 dark:border-choco-600 sticky top-8">
+                <h2 class="text-xl font-bold mb-4 text-bread dark:text-gold border-b border-gray-200 dark:border-choco-600 pb-2"><i class="fas fa-plus-circle mr-2"></i><span data-i18n="lblNewUser">Nuevo Usuario</span></h2>
+                <form action="/Admin/CrearUsuario" method="post" class="space-y-4">
+                    <div><label class="block text-xs font-bold uppercase opacity-60 mb-1" data-i18n="colUser">Usuario</label><input type="text" name="username" required class="w-full bg-gray-50 dark:bg-choco-900 border border-gray-300 dark:border-choco-600 rounded-xl p-3 outline-none focus:border-gold transition"></div>
+                    <div><label class="block text-xs font-bold uppercase opacity-60 mb-1" data-i18n="colPass">Contraseña</label><input type="text" name="password" required class="w-full bg-gray-50 dark:bg-choco-900 border border-gray-300 dark:border-choco-600 rounded-xl p-3 outline-none focus:border-gold transition"></div>
+                    <div><label class="block text-xs font-bold uppercase opacity-60 mb-1" data-i18n="colRole">Rol</label><select name="role" class="w-full bg-gray-50 dark:bg-choco-900 border border-gray-300 dark:border-choco-600 rounded-xl p-3 outline-none focus:border-gold"><option value="Cajero">Cajero</option><option value="Panadero">Panadero</option><option value="Admin">Admin</option></select></div>
+                    <button class="w-full bg-bread hover:bg-orange-600 text-white font-bold py-3 rounded-xl shadow-md transition transform active:scale-95"><i class="fas fa-save"></i> <span data-i18n="btnSave">Guardar</span></button>
+                </form>
+            </div>
+        </div>
+
+        <div class="md:col-span-2">
+            <div class="bg-white dark:bg-choco-800 rounded-3xl shadow-lg border border-gray-200 dark:border-choco-600 overflow-hidden">
+                <div class="p-4 bg-cream-200 dark:bg-choco-700 flex justify-between items-center no-print">
+                    <h3 class="font-bold text-choco-900 dark:text-gold uppercase text-sm" data-i18n="listTitle">Lista de Personal</h3>
+                    <div class="flex gap-2">
+                        <button onclick="exportTableToCSV('usuarios.csv')" class="text-xs bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700"><i class="fas fa-file-excel"></i> Excel</button>
+                        <button onclick="window.print()" class="text-xs bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700"><i class="fas fa-file-pdf"></i> PDF</button>
+                    </div>
+                </div>
+                <table class="w-full text-left" id="dataTable">
+                    <thead class="bg-gray-5 dark:bg-choco-900/50 text-xs uppercase opacity-70">
+                        <tr>
+                            <th class="p-4" data-i18n="colUser">Usuario</th>
+                            <th class="p-4" data-i18n="colPass">Contraseña</th>
+                            <th class="p-4" data-i18n="colRole">Rol</th>
+                            <th class="p-4 text-right no-print" data-i18n="colAction">Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200 dark:divide-choco-600">
+                        @foreach (var u in Model)
+                        {
+                            <tr class="hover:bg-cream-100 dark:hover:bg-choco-700/50 transition">
+                                <td class="p-4 font-bold">@u.Username</td>
+                                <td class="p-4 font-mono text-sm cursor-help relative group">
+                                    <span class="group-hover:hidden text-gray-400">••••</span>
+                                    <span class="hidden group-hover:inline text-bread">@u.Password</span>
+                                </td>
+                                <td class="p-4"><span class="px-2 py-1 rounded text-xs border font-bold">@u.Role</span></td>
+                                <td class="p-4 text-right flex justify-end gap-2 no-print">
+                                    <button onclick="abrirEditar(@u.Id, '@u.Username', '@u.Password', '@u.Role')" class="w-8 h-8 rounded bg-blue-100 text-blue-600 hover:bg-blue-500 hover:text-white transition flex items-center justify-center"><i class="fas fa-pen"></i></button>
+                                    <button onclick="abrirBorrar(@u.Id, '@u.Username')" class="w-8 h-8 rounded bg-red-100 text-red-600 hover:bg-red-500 hover:text-white transition flex items-center justify-center"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-editar" class="fixed inset-0 bg-black/80 hidden items-center justify-center z-50 backdrop-blur-sm animate-fade-in no-print">
+        <div class="bg-white dark:bg-choco-800 p-8 rounded-3xl w-96 shadow-2xl border-2 border-gold relative">
+            <button onclick="cerrarModal('modal-editar')" class="absolute top-4 right-4 text-gray-400 hover:text-red-500"><i class="fas fa-times"></i></button>
+            <h3 class="text-2xl font-black mb-6 text-bread dark:text-gold text-center" data-i18n="modalEditTitle">Editar Usuario</h3>
+            <form action="/Admin/EditarUsuario" method="post">
+                <input type="hidden" name="id" id="edit-id">
+                <div class="mb-4"><label class="block text-xs font-bold uppercase opacity-60 mb-1" data-i18n="colUser">Usuario</label><input type="text" name="username" id="edit-user" required class="w-full bg-gray-100 dark:bg-choco-900 border rounded-xl p-3 font-bold outline-none dark:text-white"></div>
+                <div class="mb-4"><label class="block text-xs font-bold uppercase opacity-60 mb-1" data-i18n="colPass">Contraseña</label><input type="text" name="password" id="edit-pass" required class="w-full bg-gray-100 dark:bg-choco-900 border rounded-xl p-3 font-mono outline-none dark:text-white"></div>
+                <div class="mb-6"><label class="block text-xs font-bold uppercase opacity-60 mb-1" data-i18n="colRole">Rol</label><select name="role" id="edit-role" class="w-full bg-gray-100 dark:bg-choco-900 border rounded-xl p-3 outline-none dark:text-white"><option value="Cajero">Cajero</option><option value="Panadero">Panadero</option><option value="Admin">Admin</option></select></div>
+                <div class="flex gap-2"><button type="button" onclick="cerrarModal('modal-editar')" class="flex-1 py-3 font-bold text-gray-400 hover:bg-gray-100 rounded-xl" data-i18n="btnCancel">Cancelar</button><button type="submit" class="flex-1 bg-bread hover:bg-orange-600 text-white font-bold py-3 rounded-xl shadow-lg" data-i18n="btnSave">Guardar</button></div>
+            </form>
+        </div>
+    </div>
+
+    <div id="modal-borrar" class="fixed inset-0 bg-black/80 hidden items-center justify-center z-50 backdrop-blur-sm animate-fade-in no-print">
+        <div class="bg-white dark:bg-choco-800 p-8 rounded-3xl w-80 shadow-2xl border-2 border-red-500 text-center">
+            <div class="text-red-500 text-5xl mb-4"><i class="fas fa-exclamation-triangle"></i></div>
+            <h3 class="text-xl font-black mb-2 text-gray-800 dark:text-white" data-i18n="modalDelTitle">¿Eliminar Usuario?</h3>
+            <p class="text-sm text-gray-500 mb-6" id="del-msg">Se borrará permanentemente.</p>
+            <form action="/Admin/EliminarUsuario" method="post" class="flex gap-2">
+                <input type="hidden" name="id" id="del-id">
+                <button type="button" onclick="cerrarModal('modal-borrar')" class="flex-1 py-3 font-bold text-gray-400 hover:bg-gray-100 rounded-xl" data-i18n="btnCancel">No</button>
+                <button type="submit" class="flex-1 bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-xl shadow-lg" data-i18n="btnConfirm">Sí, Borrar</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let lang = localStorage.getItem('bakeryLang') || 'en';
+        const i18n = {
+            en: { titleAdmin: "Administration", descAdmin: "User Management", btnFin: "Finance", lblNewUser: "New User", colUser: "Username", colPass: "Password", colRole: "Role", colAction: "Action", btnSave: "Save", listTitle: "Staff List", modalEditTitle: "Edit User", modalDelTitle: "Delete User?", btnCancel: "Cancel", btnConfirm: "Yes, Delete" },
+            es: { titleAdmin: "Administración", descAdmin: "Gestión de Usuarios", btnFin: "Finanzas", lblNewUser: "Nuevo Usuario", colUser: "Usuario", colPass: "Contraseña", colRole: "Rol", colAction: "Acción", btnSave: "Guardar", listTitle: "Lista de Personal", modalEditTitle: "Editar Usuario", modalDelTitle: "¿Eliminar Usuario?", btnCancel: "Cancelar", btnConfirm: "Sí, Borrar" },
+            fr: { titleAdmin: "Administration", descAdmin: "Gestion Utilisateurs", btnFin: "Finances", lblNewUser: "Nouvel Utilisateur", colUser: "Utilisateur", colPass: "Mot de Passe", colRole: "Rôle", colAction: "Action", btnSave: "Sauvegarder", listTitle: "Liste Personnel", modalEditTitle: "Modifier", modalDelTitle: "Supprimer?", btnCancel: "Annuler", btnConfirm: "Oui, Supprimer" }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => { initTheme(); setLang(lang); });
+
+        function toggleLang() { const langs = ['en', 'es', 'fr']; let idx = langs.indexOf(lang); lang = langs[(idx + 1) % 3]; setLang(lang); }
+        function setLang(l) {
+            lang = l; localStorage.setItem('bakeryLang', l);
+            document.getElementById('lang-label').innerText = l.toUpperCase();
+            document.querySelectorAll('[data-i18n]').forEach(el => { if(i18n[l][el.dataset.i18n]) el.innerText = i18n[l][el.dataset.i18n]; });
+        }
+        function initTheme() { if(localStorage.getItem('theme')==='light'){document.documentElement.classList.remove('dark');document.getElementById('theme-icon').innerText='🍦';}else{document.documentElement.classList.add('dark');document.getElementById('theme-icon').innerText='🍫';} }
+        function toggleTheme() { if(document.documentElement.classList.contains('dark')){document.documentElement.classList.remove('dark');localStorage.setItem('theme','light');document.getElementById('theme-icon').innerText='🍦';}else{document.documentElement.classList.add('dark');localStorage.setItem('theme','dark');document.getElementById('theme-icon').innerText='🍫';} }
+
+        // MODALES
+        function abrirEditar(id, user, pass, role) {
+            document.getElementById('edit-id').value = id;
+            document.getElementById('edit-user').value = user;
+            document.getElementById('edit-pass').value = pass;
+            document.getElementById('edit-role').value = role;
+            document.getElementById('modal-editar').classList.remove('hidden');
+            document.getElementById('modal-editar').classList.add('flex');
+        }
+        function abrirBorrar(id, user) {
+            document.getElementById('del-id').value = id;
+            document.getElementById('del-msg').innerText = user;
+            document.getElementById('modal-borrar').classList.remove('hidden');
+            document.getElementById('modal-borrar').classList.add('flex');
+        }
+        function cerrarModal(id) {
+            document.getElementById(id).classList.add('hidden');
+            document.getElementById(id).classList.remove('flex');
+        }
+
+        // EXPORTAR EXCEL (CSV)
+        function exportTableToCSV(filename) {
+            var csv = [];
+            var rows = document.querySelectorAll("table tr");
+            for (var i = 0; i < rows.length; i++) {
+                var row = [], cols = rows[i].querySelectorAll("td, th");
+                // Ignorar la última columna (Acciones)
+                for (var j = 0; j < cols.length - 1; j++) row.push(cols[j].innerText);
+                csv.push(row.join(","));
+            }
+            downloadCSV(csv.join("\n"), filename);
+        }
+        function downloadCSV(csv, filename) {
+            var csvFile = new Blob([csv], {type: "text/csv"});
+            var downloadLink = document.createElement("a");
+            downloadLink.download = filename;
+            downloadLink.href = window.URL.createObjectURL(csvFile);
+            downloadLink.style.display = "none";
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+        }
+    </script>
+</body>
+</html>
+
