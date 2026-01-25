@@ -12,7 +12,7 @@ namespace BakeryCaja.Models
         [Required]
         public string Password { get; set; } = string.Empty;
 
-        public string Role { get; set; } = "Cajero"; // Puede ser Admin o Cajero
+        public string Role { get; set; } = "Cajero"; // Puede ser Admin o Cajero o Panadero
 
         public string Branch { get; set; } = "Principal"; // La sucursal
     }

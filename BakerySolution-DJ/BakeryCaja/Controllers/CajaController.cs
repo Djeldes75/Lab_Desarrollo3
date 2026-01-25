@@ -24,7 +24,6 @@ namespace BakeryCaja.Controllers
 
             if (turnoActual == null) return View("AbrirCaja");
 
-            // 1. AUTO-REPARACIÓN DE STOCK (Por si hay ceros)
             var productosEnCero = _context.Products.Where(p => p.Stock == 0).ToList();
             if (productosEnCero.Any())
             {
@@ -32,13 +31,11 @@ namespace BakeryCaja.Controllers
                 _context.SaveChanges();
             }
 
-            // 2. CÁLCULO DE TOTALES PARA EL CIERRE (CORTE Z)
             var movimientos = _context.CashTransactions.Where(t => t.ShiftId == turnoActual.Id).ToList();
 
             decimal entradas = movimientos.Where(t => t.Type == "Entrada").Sum(t => t.Amount);
             decimal salidas = movimientos.Where(t => t.Type == "Salida").Sum(t => t.Amount);
 
-            // Pasamos los datos a la Vista (Terminal)
             ViewBag.TurnoId = turnoActual.Id;
             ViewBag.MontoInicial = turnoActual.InitialCash;
             ViewBag.Ventas = turnoActual.TotalSales;
@@ -67,7 +64,7 @@ namespace BakeryCaja.Controllers
             return RedirectToAction("Index");
         }
 
-        //COBRAR (ACTUALIZADO CON CLIENTE)
+        //COBRAR
         [HttpPost]
         public IActionResult ProcesarVenta(string jsonDetalle, decimal totalVenta, string metodoPago, string cliente)
         {
@@ -83,7 +80,6 @@ namespace BakeryCaja.Controllers
                     if (p != null) p.Stock = Math.Max(0, p.Stock - item.cantidad);
                 }
 
-            // Si el nombre viene vacío, ponemos "Consumidor Final"
             if (string.IsNullOrEmpty(cliente)) cliente = "Consumidor Final";
 
             _context.Orders.Add(new Order
@@ -101,7 +97,6 @@ namespace BakeryCaja.Controllers
             return RedirectToAction("Index");
         }
 
-        //MOVIMIENTOS (Entradas/Salidas)
         [HttpPost]
         public IActionResult RegistrarMovimiento(string tipo, decimal monto, string motivo)
         {
@@ -122,21 +117,18 @@ namespace BakeryCaja.Controllers
             return RedirectToAction("Index");
         }
 
-        // --- CERRAR TURNO (FINAL) ---
         [HttpPost]
         public IActionResult CerrarTurno()
         {
             var turno = _context.Shifts.FirstOrDefault(s => !s.IsClosed);
             if (turno != null)
             {
-                // Calcular balance final real considerando gastos
                 var movimientos = _context.CashTransactions.Where(t => t.ShiftId == turno.Id).ToList();
                 decimal entradas = movimientos.Where(t => t.Type == "Entrada").Sum(t => t.Amount);
                 decimal salidas = movimientos.Where(t => t.Type == "Salida").Sum(t => t.Amount);
 
                 turno.IsClosed = true;
                 turno.EndTime = DateTime.Now;
-                // Total Reportado = (Inicial + Ventas + Entradas) - Salidas
                 turno.ReportedTotal = (turno.InitialCash + turno.TotalSales + entradas) - salidas;
 
                 _context.SaveChanges();

@@ -1,0 +1,36 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\VS_Projects\\DS3\\Laboratorio\\DBReportes\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{F08B1188-033D-4E84-EB18-5453C1191AA7}|Factura_AW22\\Factura_AW22.rptproj|C:\\VS_Projects\\DS3\\Laboratorio\\DBReportes\\Factura_AW22\\Factura_Final.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}",
+      "RelativeMoniker": "D:0:0:{F08B1188-033D-4E84-EB18-5453C1191AA7}|Factura_AW22\\Factura_AW22.rptproj|solutionrelative:Factura_AW22\\Factura_Final.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Factura_Final.rdl [Design]",
+              "DocumentMoniker": "C:\\VS_Projects\\DS3\\Laboratorio\\DBReportes\\Factura_AW22\\Factura_Final.rdl",
+              "RelativeDocumentMoniker": "Factura_AW22\\Factura_Final.rdl",
+              "ToolTip": "C:\\VS_Projects\\DS3\\Laboratorio\\DBReportes\\Factura_AW22\\Factura_Final.rdl [Design]",
+              "RelativeToolTip": "Factura_AW22\\Factura_Final.rdl [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002573|",
+              "WhenOpened": "2026-01-24T20:23:34.565Z",
+              "EditorCaption": " [Design]"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -232,3 +232,4 @@ C:\VS_Projects\DS3\Laboratorio\BakerySolution-DJ\BakeryCaja\obj\Debug\net10.0\re
 C:\VS_Projects\DS3\Laboratorio\BakerySolution-DJ\BakeryCaja\obj\Debug\net10.0\BakeryCaja.pdb
 C:\VS_Projects\DS3\Laboratorio\BakerySolution-DJ\BakeryCaja\obj\Debug\net10.0\BakeryCaja.genruntimeconfig.cache
 C:\VS_Projects\DS3\Laboratorio\BakerySolution-DJ\BakeryCaja\obj\Debug\net10.0\ref\BakeryCaja.dll
+C:\VS_Projects\DS3\Laboratorio\BakerySolution-DJ\BakeryCaja\obj\Debug\net10.0\BakeryCaja.sourcelink.json

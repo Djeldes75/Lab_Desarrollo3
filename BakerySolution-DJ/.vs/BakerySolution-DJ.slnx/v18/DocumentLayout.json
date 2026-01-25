@@ -1,12 +1,162 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\VS_Projects\\DS3\\Laboratorio\\BakerySolution-DJ\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{F67B455F-E024-3BE4-D9AD-C8D6DE1B2CFB}|BakeryCaja\\BakeryCaja.csproj|c:\\vs_projects\\ds3\\laboratorio\\bakerysolution-dj\\bakerycaja\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F67B455F-E024-3BE4-D9AD-C8D6DE1B2CFB}|BakeryCaja\\BakeryCaja.csproj|solutionrelative:bakerycaja\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/BakeryCaja_DB/True/SqlTable/dbo.__EFMigrationsHistory.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/BakeryCaja_DB/True/SqlTable/dbo.AuditLogs.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/BakeryCaja_DB/True/SqlTable/dbo.CashTransactions.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/BakeryCaja_DB/True/SqlTable/dbo.Orders.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/BakeryCaja_DB/True/SqlTable/dbo.Products.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/BakeryCaja_DB/True/SqlTable/dbo.Shifts.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/BakeryCaja_DB/True/SqlTable/dbo.Users.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F67B455F-E024-3BE4-D9AD-C8D6DE1B2CFB}|BakeryCaja\\BakeryCaja.csproj|c:\\vs_projects\\ds3\\laboratorio\\bakerysolution-dj\\bakerycaja\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F67B455F-E024-3BE4-D9AD-C8D6DE1B2CFB}|BakeryCaja\\BakeryCaja.csproj|solutionrelative:bakerycaja\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F67B455F-E024-3BE4-D9AD-C8D6DE1B2CFB}|BakeryCaja\\BakeryCaja.csproj|c:\\vs_projects\\ds3\\laboratorio\\bakerysolution-dj\\bakerycaja\\controllers\\cajacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F67B455F-E024-3BE4-D9AD-C8D6DE1B2CFB}|BakeryCaja\\BakeryCaja.csproj|solutionrelative:bakerycaja\\controllers\\cajacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 7,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "dbo.__EFMigrationsHistory [Data]",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/BakeryCaja_DB/True/SqlTable/dbo.__EFMigrationsHistory.sql",
+              "ToolTip": "dbo.__EFMigrationsHistory [Data]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002897|",
+              "WhenOpened": "2026-01-25T00:36:04.44Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "dbo.AuditLogs [Data]",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/BakeryCaja_DB/True/SqlTable/dbo.AuditLogs.sql",
+              "ToolTip": "dbo.AuditLogs [Data]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002897|",
+              "WhenOpened": "2026-01-25T00:35:43.451Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "dbo.CashTransactions [Data]",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/BakeryCaja_DB/True/SqlTable/dbo.CashTransactions.sql",
+              "ToolTip": "dbo.CashTransactions [Data]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002897|",
+              "WhenOpened": "2026-01-25T00:34:56.355Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "dbo.Orders [Data]",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/BakeryCaja_DB/True/SqlTable/dbo.Orders.sql",
+              "ToolTip": "dbo.Orders [Data]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002897|",
+              "WhenOpened": "2026-01-25T00:34:33.746Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "dbo.Products [Data]",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/BakeryCaja_DB/True/SqlTable/dbo.Products.sql",
+              "ToolTip": "dbo.Products [Data]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002897|",
+              "WhenOpened": "2026-01-25T00:34:26.406Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "dbo.Shifts [Data]",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/BakeryCaja_DB/True/SqlTable/dbo.Shifts.sql",
+              "ToolTip": "dbo.Shifts [Data]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002897|",
+              "WhenOpened": "2026-01-25T00:34:11.68Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\VS_Projects\\DS3\\Laboratorio\\BakerySolution-DJ\\BakeryCaja\\Models\\User.cs",
+              "RelativeDocumentMoniker": "BakeryCaja\\Models\\User.cs",
+              "ToolTip": "C:\\VS_Projects\\DS3\\Laboratorio\\BakerySolution-DJ\\BakeryCaja\\Models\\User.cs",
+              "RelativeToolTip": "BakeryCaja\\Models\\User.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAABIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T00:32:59.825Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\VS_Projects\\DS3\\Laboratorio\\BakerySolution-DJ\\BakeryCaja\\Program.cs",
+              "RelativeDocumentMoniker": "BakeryCaja\\Program.cs",
+              "ToolTip": "C:\\VS_Projects\\DS3\\Laboratorio\\BakerySolution-DJ\\BakeryCaja\\Program.cs",
+              "RelativeToolTip": "BakeryCaja\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAA8AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-24T23:31:05.555Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "dbo.Users [Data]",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/BakeryCaja_DB/True/SqlTable/dbo.Users.sql",
+              "ToolTip": "dbo.Users [Data]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002897|",
+              "WhenOpened": "2026-01-24T23:55:11.304Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "CajaController.cs",
+              "DocumentMoniker": "C:\\VS_Projects\\DS3\\Laboratorio\\BakerySolution-DJ\\BakeryCaja\\Controllers\\CajaController.cs",
+              "RelativeDocumentMoniker": "BakeryCaja\\Controllers\\CajaController.cs",
+              "ToolTip": "C:\\VS_Projects\\DS3\\Laboratorio\\BakerySolution-DJ\\BakeryCaja\\Controllers\\CajaController.cs",
+              "RelativeToolTip": "BakeryCaja\\Controllers\\CajaController.cs",
+              "ViewState": "AgIAAHYAAAAAAAAAAAAcwIkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-24T22:20:32.985Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }

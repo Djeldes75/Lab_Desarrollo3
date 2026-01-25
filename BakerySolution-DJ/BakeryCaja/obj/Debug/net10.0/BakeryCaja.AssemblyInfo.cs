@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BakeryCaja")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a18d495ce02dc092ebfc0c49de0d45f0c748fe28")]
 [assembly: System.Reflection.AssemblyProductAttribute("BakeryCaja")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BakeryCaja")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
